@@ -1,9 +1,9 @@
 <?php
 class Database{
-	private $host="localhost";
-	private $username="root";
-	private $password="1234";
-	private $database="cafteria";
+	private $host="db4free.net";
+	private $username="abdelrahmangbr";
+	private $password="#itiphppro";
+	private $database="iticafeteria";
 	private $DbCon;
 	
 	
@@ -139,6 +139,3 @@ $a->connect();
 // while($a=$ab->fetch_array()){
 // 	echo $a[0]." ".$a[1]." ".$a[2]."<br />";
 // }
-
-
-?>
