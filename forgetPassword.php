@@ -6,10 +6,11 @@ error_reporting(E_ALL); // for debugging
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-require './PHPMailer-master/src/Exception.php';
-require './PHPMailer-master/src/PHPMailer.php';
-require './PHPMailer-master/src/SMTP.php';
+require './vendor/phpmailer/phpmailer/src/Exception.php';
+require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require './vendor/phpmailer/phpmailer/src/SMTP.php';
 
 $error = "";
 if (isset($_POST["email"]) && (!empty($_POST["email"]))) {
@@ -50,8 +51,8 @@ if (isset($_POST["email"]) && (!empty($_POST["email"]))) {
       $output = '<p>Dear user,</p>';
       $output .= '<p>Please click on the following link to reset your password.</p>';
       $output .= '<p>================================================================</p>';
-      $output .= '<p><a href="http://localhost/CafeteriaSystem/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset" target="_blank">
-http://localhost/CafeteriaSystem/reset-password.php.php?key=' . $key . '&email=' . $email . '&action=reset</a></p>';
+      $output .= '<p><a href="http://localhost/cafeteria-project-iti/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset" target="_blank">
+http://localhost/cafeteria-project-iti/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset</a></p>';
       $output .= '<p>================================================================</p>';
       $output .= '<p>Please be sure to copy the entire link into your browser.
 The link will expire after 1 day for security reasons.</p>';
@@ -70,12 +71,12 @@ just in case someone is trying to hack it.</p>';
       $mail->Host = 'smtp.gmail.com'; // Enter your host here
       $mail->SMTPAuth = true;
       $mail->Username = 'OS.cafeteria.42@gmail.com'; // Enter your email here
-      $mail->Password = '#password'; // Enter your password here
+      $mail->Password = '#itiphppro'; // Enter your password here
       $mail->SMTPSecure = 'tls'; // For Gmail
       $mail->Port = 587;
       $mail->IsHTML(true);
       $mail->From =  'OS.cafeteria.42@gmail.com';
-      $mail->FromName = "OS.cafeteria.42";
+      $mail->FromName = "abdelrahman gbr";
       $mail->Sender = $fromserver; // indicates ReturnPath header
       $mail->Subject = $subject;
       $mail->Body = $body; 
