@@ -1,3 +1,49 @@
+<?php
+    session_start(); 
+    $_session['shopping_cart'] = array();
+
+    $db=require('./database/dbConnect.php'); 
+    $data=new Database();
+    $data->connect();
+    $selectAllProduct=$data->select("product");
+
+      if(isset($_POST["add_to_cart"]))  
+       {  
+        if(isset($_SESSION["shopping_cart"]))  
+        {  
+            $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");  
+            if(!in_array($_GET["id"], $item_array_id))  
+            {  
+                    $count = count($_SESSION["shopping_cart"]);  
+                    $item_array = array(  
+                        'item_id'               =>     $_GET["id"],  
+                        'item_name'               =>     $_POST["hidden_name"],  
+                        'item_price'          =>     $_POST["hidden_price"],  
+                        'item_quantity'          =>     $_POST["quantity"]  
+                    );  
+                    $_SESSION["shopping_cart"][$count] = $item_array;  
+            }  
+            else  
+            {  
+                    echo '<script>alert("Item Already Added")</script>';  
+                    echo '<script>window.location="index.php"</script>';  
+            }  
+        }  
+        else  
+        {  
+            $item_array = array(  
+                    'item_id'               =>     $_GET["id"],  
+                    'item_name'               =>     $_POST["hidden_name"],  
+                    'item_price'          =>     $_POST["hidden_price"],  
+                    'item_quantity'          =>     $_POST["quantity"]  
+            );  
+            $_SESSION["shopping_cart"][0] = $item_array;  
+        }  
+ } 
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,54 +176,32 @@
     <h1 class="heading"> our <span>menu</span> </h1>
 
     <div class="box-container">
-
+        <?php
+            while($row=$selectAllProduct->fetch_assoc()){
+        ?>
         <div class="box">
-            <img src="images/menu-1.png" alt="">
-            <h3>tasty and healty</h3>
-            <div class="price">$15.99 <span>20.99</span></div>
-            <a href="#" class="btn">add to cart</a>
+            <img src="images/<?php echo $row['pic'];?>" alt="">
+            <h3><?php echo $row['name'];?></h3>
+            <div class="price"><?php echo $row['price'];?> <span><?php echo ((int) $row['price'])+((int) $row['price'])*20/100;?></span></div>
+            <!-- <a href="addCard.php" class="btn" onclick="">add to cart</a> -->
+            <?php
+               echo "<a  class='btn' onclick='addcard( {$row['product_id']})'>add to cart</a>"
+            ?>
+            
         </div>
-
-        <div class="box">
-            <img src="images/menu-2.png" alt="">
-            <h3>tasty and healty</h3>
-            <div class="price">$15.99 <span>20.99</span></div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <img src="images/menu-3.png" alt="">
-            <h3>tasty and healty</h3>
-            <div class="price">$15.99 <span>20.99</span></div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <img src="images/menu-4.png" alt="">
-            <h3>tasty and healty</h3>
-            <div class="price">$15.99 <span>20.99</span></div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <img src="images/menu-5.png" alt="">
-            <h3>tasty and healty</h3>
-            <div class="price">$15.99 <span>20.99</span></div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <img src="images/menu-6.png" alt="">
-            <h3>tasty and healty</h3>
-            <div class="price">$15.99 <span>20.99</span></div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
+        <?php } ?>
+        
     </div>
-
+    <br/>
+    <form action="addCard.php" method="post">
+        <input type="hidden" name="cardItems" id='cardItems' value="">    
+        <input type="submit" value="Check your card" class="btn">
+    </form>
 </section>
 
 <!-- menu section ends -->
+
+
 
 <section class="products" id="products">
 
