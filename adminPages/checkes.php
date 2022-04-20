@@ -32,6 +32,155 @@ include '../config.php';
     <link rel="stylesheet" href="../css/checks.css">
     <link rel="stylesheet" href="../css/adminNav.css" />
     <title>Users orders</title>
+
+    <style>
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+body {
+    background-color: #faf9f4;
+    font-family: 'Tajawal', sans-serif;
+    /* padding-top: 20px; */
+
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    /* max-width: unset; */
+
+}
+.myform{
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(44 98 98);
+}
+
+#table-head{
+    text-align: center;
+    background-color: midnightblue;
+    color: navajowhite;
+    font-size: 1.3rem;
+}
+
+.item-tab{
+    text-align: center;
+}
+
+.order-details{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: #241a08;
+}
+.date-from-to{
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-between;
+    width: 100%;
+    color :#fff;
+}
+
+.date-from{
+    margin-right: 10px;
+
+}
+
+.input-container-user{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+    width: 100%;
+     margin-left: 10px;
+    /*margin-bottom: 10px; */
+}
+
+.input-container-user label{
+    margin-right: 25px;
+    color: #fff;
+}
+
+.input-user{
+    flex-basis: 80%;
+
+}
+
+.input-user select{
+    font-size: 16px;
+    text-align: center;
+    width: max-content;
+
+}
+
+.find-outer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.find-inner input{
+    width: 5rem;
+}
+
+/* .user {
+
+    margin: 10px;
+    padding: 10px;
+    background-color: #f3f1e4;
+} */
+
+.order {
+    /* background: #999; */
+    padding: 10px;
+
+    margin: 10px;
+}
+
+.item-card {
+    background: #faf9f4;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+.btn-primary{
+    background-color: #f3f1e4;
+    border-color: #f3f1e4;
+    color: #241a08;
+    margin-top: 27px;
+}
+.item-img img{
+    width: 75px;
+
+}
+.table-head {
+    border: 1px solid #666;
+    margin-bottom:5px;
+}
+
+
+        </style>
+
+
 </head>
 
 <body>
