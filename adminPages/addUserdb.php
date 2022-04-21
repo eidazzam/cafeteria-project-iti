@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
         }
         if ($file_size > 2097152) {
-            $errors[] = 'File size must be excately 2 MB';
+            $errors[] = 'File size must be lower than 2 MB';
         }
         if (empty($errors) == true) {
             move_uploaded_file($file_tmp, "../images/" . $file_name);
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $sql = "INSERT INTO user (username,password,email,room,ext,profile_pic,is_admin) Values(?,?,?,?,?,?,?)";
             $stmt = $db->prepare($sql);
-            $stmt->execute([$userName, $password, $email, $room, $exten, "/CafeteriaSystem/images/" . $_FILES['image']['name'], $is_admin]);
+            $stmt->execute([$userName, $password, $email, $room, $exten, "/cafeteria-project-iti/images/" . $_FILES['image']['name'], $is_admin]);
             $user = "accepted";
             header('Location: addUser.php?user=' . $user . '');
         }
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($updateFlag == false) {
             $sql = "UPDATE user SET username=?,password=?,email=?,room=?,ext=?,profile_pic=?,is_admin=? WHERE user_id=?";
             $stmt = $db->prepare($sql);
-            $stmt->execute([$userName, $password, $email, $room, $exten, "/CafeteriaSystem/images/" . $_FILES['image']['name'], $is_admin, $hidden_id]);
+            $stmt->execute([$userName, $password, $email, $room, $exten, "/cafeteria-project-iti/images/" . $_FILES['image']['name'], $is_admin, $hidden_id]);
             $user = "accepted";
             header('Location: allUsers.php');
         }
