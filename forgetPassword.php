@@ -91,14 +91,49 @@ just in case someone is trying to hack it.</p>';
    }
 } else {
 ?>
-   <link rel="stylesheet" href="css/forgetPass.css">
-   <form method="post" action="" class='form' name="reset"><br /><br />
-      <label>Enter Your Email Address:</label><br /><br />
-      <input type="email" name="email" placeholder="username@email.com" />
-      <br /><br />
-      <input type="submit" value="Reset Password" />
-   </form>
-   <p>&nbsp;</p>
-   <p>&nbsp;</p>
-   <p>&nbsp;</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+        body {
+            background-image: url("./images/back2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+   <!-- <link rel="stylesheet" href="css/forgetPass.css"> -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+   <body>
+      <form method="post" action="" class='form' name="reset">
+         <div class="container text-center my-5" style="background-color:#212529; color:white;border-radius:1rem;max-width:500px;min-width:350px;">
+            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 justify-content-around text-white" style="border-radius: 1rem; ">
+               <div class="col-lg-8 col-lg-offset-8">
+                  <div class="panel panel-default">
+                     <div class="panel-heading my-3">
+                        <h3 class="panel-title">Reset Password</h3>
+                     </div>
+                     <div class="panel-body">
+                        <div class="form-group my-2">
+                           <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="my-2">
+                  <input type="submit" name="submit" class="btn btn-primary btn-block my-2 mb-4" value="Reset Password">
+                  </div>
+               </form>
+               <!-- <label class="form-label">Enter Your Email Address:</label>
+               <input class="form-input" type="email" name="email" placeholder="username@email.com" />
+               <input class="btn btn-primary" type="submit" value="Reset Password" /> -->
+      <!-- <p>&nbsp;</p> -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+ 
 <?php } ?>
