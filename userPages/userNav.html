@@ -58,8 +58,9 @@
               width="30"
               class="navbar-brand form-control me-2"
               alt="user"
-              src=<?php echo $_SESSION['profile_pic']?>
-              <!-- src="../images/user.png" -->
+              src="../images/user.png" />
+              <!-- trying to resize before upload using gd2 library -->
+              <!-- src=<?php echo $_SESSION['profile_pic']?> -->
             <a class="text-light"><?php echo $_SESSION['name']?></a>
             <div class="log-out"></div>
             <a id="logOut" href="../logout.php"
