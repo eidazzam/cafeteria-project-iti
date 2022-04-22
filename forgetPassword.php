@@ -126,7 +126,7 @@ just in case someone is trying to hack it.</p>';
                      </div>
                   </div>
                   <div class="my-2">
-                  <input type="submit" name="submit" class="btn btn-primary btn-block my-2 mb-4" value="Reset Password">
+                  <input type="submit" name="submit" class="btn btn-outline-light btn-lg px-5 my-2" value="Reset Password">
                   </div>
                </form>
                <!-- <label class="form-label">Enter Your Email Address:</label>
