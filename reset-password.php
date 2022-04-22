@@ -25,19 +25,50 @@ deactivated.</p>';
         $expDate = $row['expDate']; // get the expiry date
         if ($expDate >= $curDate) { // if the expiry date is greater than the current date
 ?>
-            <br />
-            <form method="post" action="" name="update">
-                <input type="hidden" name="action" value="update" />
-                <br /><br />
-                <label><strong>Enter New Password:</strong></label><br />
-                <input type="password" name="pass1" maxlength="15" required />
-                <br /><br />
-                <label><strong>Re-Enter New Password:</strong></label><br />
-                <input type="password" name="pass2" maxlength="15" required />
-                <br /><br />
-                <input type="hidden" name="email" value="<?php echo $email; ?>" />
-                <input type="submit" value="Reset Password" />
-            </form>
+            <!DOCTYPE html>
+            <html lang="en">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Password Reset</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+                <style>
+                    body {
+                        background-image: url("./images/back2.jpg");
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-attachment: fixed;
+                    }
+                </style>
+            </head>
+
+            <body>
+                <br />
+                <form method="post" action="" name="update" class="container d-flex justify-content-center py-5 my-5 text-center" style="background-color:#212529; border-radius:1rem;max-width:500px;min-width:350px;">
+                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 justify-content-evenly text-white">
+                        <div class="col-12 col-lg-8 col-lg-offset-8">
+                            <input type="hidden" name="action" value="update" />
+                        </div>
+                        <div class="col-12 col-lg-8 col-lg-offset-8">
+                            <label><strong>Enter New Password:</strong></label><br />
+                            <input type="password" name="pass1" maxlength="15" required />
+                        </div>
+                        <div class="col-12 col-lg-8 col-lg-offset-8">
+                            <label><strong>Re-Enter New Password:</strong></label><br />
+                            <input type="password" name="pass2" maxlength="15" required />
+                        </div>
+                        <div class="col-12 col-lg-8 col-lg-offset-8">
+                            <input type="hidden" name="email" value="<?php echo $email; ?>" />
+                            <input type="submit" class="btn btn-outline-light btn-lg px-5 my-2" value="Reset Password" />
+                        </div>
+                    </div>
+                </form>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+            </body>
+
+            </html>
 <?php
         } else {
             $error .= "<h2>The reset Link (key) is Expired</h2>
