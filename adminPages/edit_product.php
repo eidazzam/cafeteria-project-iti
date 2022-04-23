@@ -51,12 +51,12 @@ if (isset($data->file)) {
 
 session_start();
 // If the user is not logged in navajowhiteirect to the login page...
-// if (!isset($_SESSION['loggedin'])) {
-//     header('Location: ../login.php');
-// }
-// if ($_SESSION['is_admin'] != 1) {
-//     die("Access Denied");
-// }
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: ../login.php');
+}
+if ($_SESSION['is_admin'] != 1) {
+    die("Access Denied");
+}
 ?>
 
 
@@ -115,7 +115,7 @@ session_start();
             <div class="col-md-4 "></div> <!-- Just Padding  -->
             <div class="col-md-5">
 
-                <div class="card card-body">
+                <div class="card card-body ">
                     <form action="save_edited_product.php?id=<?php echo "{$_GET['id']}" ?>" method="POST" enctype="multipart/form-data">
 
                         <div class="title form-group mb-3">
