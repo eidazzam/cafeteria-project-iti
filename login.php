@@ -18,11 +18,19 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/login.css" />
+    <!-- <link rel="stylesheet" href="css/login.css" /> -->
+    <style>
+        body {
+            background-image: url("./images/back2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 
 <body>
-    <form action="authenticate.php" method="POST" class="vh-100 gradient-custom">
+    <form action="authenticate.php" method="POST" class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">

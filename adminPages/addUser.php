@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <form class="container d-flex justify-content-center py-5 my-5 needs-validation" style="background-color:#212529; color:white;border-radius:1rem;max-width:500px;min-width:350px;" action="addUserdb.php" method="POST" id="form" enctype="multipart/form-data" novalidate>
         <div class="row mx-3 py-3">
             <div class="col-md-12">
+                <h2 class="text-center">Add New User</h2>
                 <label for="validationCustomUsername" class="form-label">Username</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend">@</span>

@@ -43,39 +43,33 @@
           alt="ITI Cafeteria"
           class="mx-3"
         />
-        <a class="navbar-brand" href="deliverOrders.php">Home</a>
+        <a class="navbar-brand" href="#">Home</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="list_products.php"
-                >Products</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="allUsers.php">Users</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="manualOrder.php">Manual Order</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="checkes.php">Checks</a>
+              <a class="nav-link" href="myorders.php">Order</a>
             </li>
           </ul>
-          <div class="d-flex align-items-center">
+          <div class="container d-flex align-items-center">
+            <div class="row">
+              <div class="col-12">
+
             <img
-              width="60"
-              src="../images/admin.png"
-              class="navbar-brand"
-              class="form-control me-2"
-            />
-            <a class="text-light">Admin</a>
+              width="30"
+              class="navbar-brand form-control me-2"
+              alt="user"
+              src="../images/user.png" />
+              <!-- trying to resize before upload using gd2 library -->
+              <!-- src=<?php echo $_SESSION['profile_pic']?> -->
+            <a class="text-light"><?php echo $_SESSION['name']?></a>
             <div class="log-out"></div>
             <a id="logOut" href="../logout.php"
               ><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a
             >
+          </div>
+        </div>
+
+
           </div>
         </div>
       </div>
