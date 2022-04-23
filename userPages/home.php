@@ -37,7 +37,8 @@ if ($_SESSION['is_admin']==1){
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/adminNav.css" />
 
     <title>Home</title>
 </head>
@@ -147,6 +148,11 @@ if ($_SESSION['is_admin']==1){
 
 
     <script src="../js/home.js"></script>
+      <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
 </body>
 
 </html>
