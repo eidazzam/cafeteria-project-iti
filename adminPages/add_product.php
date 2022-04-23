@@ -12,12 +12,12 @@ if (isset($_GET["data"])) {
 
 session_start();
 // // If the user is not logged in redirect to the login page...
-// if (!isset($_SESSION['loggedin'])) {
-//     header('Location: ../login.php');
-// }
-// if ($_SESSION['is_admin'] != 1) {
-//     die("Access Denied");
-// }
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: ../login.php');
+}
+if ($_SESSION['is_admin'] != 1) {
+    die("Access Denied");
+}
 ?>
 
 
@@ -37,10 +37,36 @@ session_start();
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body {
+        background-image: url("../images/coffe_black.jpg");
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-position: center;
+        background-size: cover;
+    }
 
+    #add {
+        background-color: navajowhite;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    h1 {
+        color: navajowhite;
+        text-align: center;
+    }
+
+    .card {
+        margin-top: 30px;
+        background-color: black;
+        border-radius: 20px;
+    }
+</style>
 <main class="container p-4">
     <div class="row">
-        <div class="col-md-3"></div> <!-- Just Padding  -->
+        <div class="col-md-4"></div> <!-- Just Padding  -->
         <div class="col-md-5">
 
             <div class="card card-body">
@@ -104,7 +130,7 @@ session_start();
                         ?>
 
                     </p>
-                    <input type="submit" name="save_task" class="btn btn-success btn-block mb-3" value="Add Product">
+                    <input type="submit" name="save_task" id="add" class="btn btn-success btn-block mb-3" value="Add ">
                 </form>
 
             </div>
