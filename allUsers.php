@@ -18,41 +18,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>All Users</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/adminNav.css" />
+<link rel="stylesheet" href="css/users.css" />
+<link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+ table th,
+ table tr,
+ table td {
+    border-left: 1px solid navajowhite;
+    border-right: 1px solid navajowhite;
+    border-top: 1px solid navajowhite;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+
+}
+</style>  
 </head>
+
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Cafatiria</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link " href="#">Products</a>
-            <a class="nav-link " href="#">Users</a>
-            <a class="nav-link " href="#">Manual Order</a>
-            <a class="nav-link " href="#">Checks</a>
-          </div>
+<?php include('adminNav.html') ?>
+<main id='main-container' class="container p-4">
+<div id="table-container">
+
+      <div class='table-title'>
+            <div>All Users</div>
+            <button onclick="window.location.href='addUser.php'">Add User</button>
         </div>
-        
-      </nav>
-    <div class="container">
-        
-    <div class="text-center">
-            <a href="#" class="mt-4 btn btn-success">Add user</a>
-        </div>
-        <table class="table mt-4">
-            <thead>
-              <tr>
-                <th scope="col">User Name</th>
-                <th scope="col">Room</th>
-                <th scope="col">Image</th>
-                <th scope="col">Ext.</th>
-                <th scope="col">Action</th>
+        <table >
+            
+            <tr class="table-header">
+                <th>User Name</th>
+                <th>Room</th>
+                <th>Image</th>
+                <th>Ext.</th>
+                <th>Action</th>
                 
               </tr>
-            </thead>
-            <tbody>
+            
+            
 
             <?php
 
@@ -73,34 +83,34 @@
         while($user=$users->fetch_assoc()){ 
 
   ?>
- <tr>
-          <th scope="row"><?php echo $user['username'];?></th>
+    <tr>
+          <td><?php echo $user['username'];?></td>
           <td><?php echo $user['room'];?></td>
-          <td><?php echo'<img height="50" width="60" src="./images/'.$user['profile_pic'].'">';?></td>
+          <td><?php echo'<img  width=50px src="./images/'.$user['profile_pic'].'">';?></td>
           <td><?php echo $user['ext'];?></td>
           <td>
               
-              <a class="btn btn-primary" href="./edituser.php?id=<?php echo $user['user_id'];?>">Edit</a>
-              <a class="btn btn-danger" href="./deleteuser.php?id=<?php echo $user['user_id'];?>">Delete</a>
+              <a class="btn btn-primary" href="./edituser.php?id=<?php echo $user['user_id'];?>" class="btn btn-warning"><i class="fas fa-sloid fa-marker"> </i></a>
+              <a class="btn btn-danger" href="./deleteuser.php?id=<?php echo $user['user_id'];?>" class="btn btn-danger"> <i class="far fa-trash-alt"></i></a>
           </td>
         </tr>
     <?php
 
      }
 
-    ?>
-
-
-            
-             
-            </tbody>
+    ?>  
+           
           </table>
 
+    
     </div>
 
+</main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    </body>
+   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    
+  </body>
     </html>
 
     <?php
