@@ -17,6 +17,7 @@
   function increasePrice(p, id) {
     document.getElementById(id).value++;
     // totalamount += p;
+    document.getElementById('totalSum').innerHTML = parseInt(document.getElementById('totalSum').innerHTML) + parseInt(p);
     
     document.getElementById("totalPrice").value = parseInt(document.getElementById("totalPrice").value) + parseInt(p);
   }
@@ -26,6 +27,8 @@
       // if(document.getElementById(id).value > 2)
       // console.log("object")
         document.getElementById("totalPrice").value = parseInt(document.getElementById("totalPrice").value) - parseInt(p);
+        document.getElementById('totalSum').innerHTML = parseInt(document.getElementById('totalSum').innerHTML) - parseInt(p);
+
       // totalamount -= p;
     }
     // if (p <= 0) p = 0;
@@ -106,7 +109,7 @@
                   <a  onclick=decreasePrice(<?php echo $item['price']. ','. $item["product_id"]?>)>-</a>
                   
                     <!-- <input type="number" name="quantity" id="" min="1" style=" width: 35px;"> -->
-                    <input type="number" data-step="1" data-min="0" value="1" id=<?php echo  $item["product_id"] ?> name=<?php echo  $item["product_id"] ?>  title="Qty" class="input-qty qty" size="4" style=" width: 35px;" >                
+                    <input type="number" data-step="1" data-min="0" value="1" id=<?php echo  $item["product_id"] ?> name=<?php echo  $item["product_id"] ?>  title="Qty" class="input-qty qty" size="4" style=" width: 35px;" readonly >                
                   
                   <a  onclick=increasePrice(<?php echo $item['price']. ','. $item["product_id"]?>)>+</a>
                 </div>
@@ -122,9 +125,9 @@
             // var_dump($a);
             
             ?>
-            <div class="back-to-shop">
-              <a href="#">&leftarrow;</a
-              ><span class="text-muted">Back to shop</span>
+            <div class="back-to-shop" href="home.php?id=1">
+              <a href="home.php?id=1">&leftarrow;</a
+              ><span class="text-muted" href="home.php?id=1">Back to shop</span>
             </div>
           </div>
           <div class="col-md-4 summary">
@@ -134,7 +137,7 @@
             <hr />
             <div class="row">
               <div class="col" style="padding-left: 0">ITEMS <?php echo $count ?></div>
-              <div class="col text-right">&euro; <?php echo $sum  ?></div>
+              <div class="col text-right" >&euro; <span id="totalSum"><?php echo $sum  ?></san></div>
             </div>
             
               <p>SHIPPING</p>
@@ -150,7 +153,7 @@
             >
               <div class="col">TOTAL PRICE</div>
               <!-- <div class="col text-right">&euro; <input id="totalPrice" type="number" name="totalPrice" value=<?php echo $sum +5 ?>></div> -->
-              <div class="col text-right">&euro; <input id="totalPrice" type="number" name="totalPrice" value=<?php echo $sum +5 ?>></div>
+              <div class="col text-right">&euro; <input id="totalPrice" type="number" name="totalPrice" value=<?php echo $sum +5 ?> style=" width: 55px;" readonly></div>
 
             </div>
             <input type="submit" value="CHECKOUT" class="btn" >
