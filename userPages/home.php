@@ -60,7 +60,7 @@ if ($_SESSION['is_admin']==1){
                 <a id="logOut" href="../logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
             </div>
         </div>
-        <!-- <i class="fa fa-bars" aria-hidden="true"></i> -->
+        <i class="fa fa-bars" aria-hidden="true"></i>
 
     </div>
 
@@ -96,7 +96,7 @@ if ($_SESSION['is_admin']==1){
                 </div>                
             </form>
         <div class="product-list-addUser">
-            <!-- <input type="text" name="search" id="search"> -->
+            <input type="text" name="search" id="search">
             <?php
             include '../config.php';
             //latest order
@@ -142,9 +142,9 @@ if ($_SESSION['is_admin']==1){
         </div>
     </div>
     
-    <!-- <div class="footer">
+    <div class="footer">
         <p>Footer</p>
-    </div> -->
+    </div>
 
 
     <script src="../js/home.js"></script>
