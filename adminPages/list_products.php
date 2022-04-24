@@ -14,7 +14,24 @@ if ($_SESSION['is_admin'] != 1) {
 ?>
 
 
-<?php include("../db.php"); ?>
+<?php include("../db.php");
+
+$results_per_page = 2;
+$sql = "select * from product";
+$result = mysqli_query($conn, $sql);
+$number_of_results = mysqli_num_rows($result);
+$number_of_pages = ceil($number_of_results / $results_per_page);
+
+if (!isset($_GET['page'])) {
+    $page = 1;
+} else {
+    $page = $_GET['page'];
+}
+$this_page_first_result = ($page - 1) * $results_per_page;
+$sql = 'SELECT * FROM product LIMIT ' . $this_page_first_result . ',' .  $results_per_page;
+$result = mysqli_query($conn, $sql);
+
+?>
 
 <!-- <'?php include('../includes/header.php'); ?> -->
 <?php include('adminNav.html') ?>
@@ -48,7 +65,7 @@ if ($_SESSION['is_admin'] != 1) {
             </tr>
 
             <?php
-            $query = "SELECT p.* ,c.name as category FROM product p, category c Where p.category_id=c.id";
+            $query = "SELECT p.* ,c.name as category FROM product p, category c Where p.category_id=c.id  LIMIT " . $this_page_first_result . "," .  $results_per_page;
             $result_tasks = mysqli_query($conn, $query);
 
 
@@ -67,9 +84,27 @@ if ($_SESSION['is_admin'] != 1) {
                         </a>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php }
+
+            ?>
         </table>
+
     </div>
+
 </main>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item " style="margin:1px"><a class="page-link text-dark" style="background-color:navajowhite; font-weight:bold;" href="list_products.php?page=1">First</a></li>
+
+        <?php
+
+        for ($page = 1; $page <= $number_of_pages; $page++) {
+            echo ' <li class="page-item " style="margin:1px" ><a class="page-link text-dark" href="list_products.php?page=' . $page . '" style="background-color:navajowhite; font-weight:bold;">' . $page . '</a></li>';
+        }
+        ?>
+
+        <li class="page-item " style="margin:1px"><a class="page-link text-dark" style="background-color:navajowhite; font-weight:bold;" href="?page=<?php echo $number_of_pages; ?>">Last</a></li>
+    </ul>
+</nav>
 
 <!-- <'?php include('../includes/footer.php'); ?> -->
