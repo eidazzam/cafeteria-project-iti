@@ -1,1 +1,4 @@
-/database/dbConnect.php
+dbConnect.php
+config.php
+databaseHandler.php
+db.php
