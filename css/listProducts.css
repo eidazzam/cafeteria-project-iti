@@ -57,6 +57,11 @@ body {
     /* height: 100vh;  */
 }
 
+#table-container {
+    /* padding-bottom: 20px; */
+    /* height: 80%; */
+}
+
 table {
     width: 65vw;
     border: 1px solid lightgray;
@@ -83,8 +88,17 @@ td:first-child {
     text-align: center;
 }
 
+tr,
+th,
+td {
+    border-left: 1px solid navajowhite;
+    border-right: 1px solid navajowhite;
+    border-top: 1px solid navajowhite;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
 
-
+}
 
 
 .update-btn {

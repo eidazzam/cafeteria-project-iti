@@ -1,33 +1,17 @@
 <?php
     session_start(); 
-    if(empty($_SESSION['loggedin'])){
-        header('Location: ../login.php');
-    }
-    if($_SESSION['is_admin']==1){
-        die ("Access Denied");
-    }
-
+    // require('../database/dbConnect.php');
+    // $_session['']
     $_session['shopping_cart'] = array();
 
     $db=require('../database/dbConnect.php'); 
     $data=new Database();
-    $dbcon= $data->connect();
+    $dbcon=$data->connect();
+
+    
+   
     $selectAllProduct=$data->select("product");
-
-    $previous_week = strtotime("-1 week +1 day");
-    // var_dump($previous_week);
-    $start_week = strtotime("last sunday midnight",$previous_week);
-    $end_week = strtotime("next saturday",$start_week);
-
-    $start_week = date("Y-m-d",$start_week);
-    $end_week = date('Y-m-d H:i:s');
-    // var_dump($start_week);
-    // var_dump($end_week);
-    
-    
-    $query="SELECT Distinct `product`.* FROM `orders`,`product`,`order_product` WHERE product.product_id = order_product.product_id AND order_product.order_id = orders.order_id AND orders.date BETWEEN '{$start_week}' AND '{$end_week}' ORDER BY orders.date desc ";
-    $result=$dbcon->query($query);
-
+    $selectAllUser=$data->select("user","*","is_admin=0");
 
       if(isset($_POST["add_to_cart"]))  
        {  
@@ -82,18 +66,13 @@
 
 </head>
 <body>
-    <?php
-    
-    // require_once './userNav.html';
-    
-    ?>
     
 <!-- header section starts  -->
 
 <header class="header">
 
     <a href="#" class="logo">
-        <img src="images/logo.png" alt="">
+        <img src="../images/logo.png" alt="">
     </a>
 
     <nav class="navbar">
@@ -199,25 +178,19 @@
 <!-- menu section starts  -->
 
 <section class="menu" id="menu">
-
-    <h1 class="heading">Latest <span>orders</span> </h1>
-    <div class="box-container">
-    <?php while($row=$result->fetch_array()){ ?>
-        
-        <div class="box">
-            <img src="../images/<?php echo $row['pic'];?>" alt="">
-            <h3><?php echo $row['name'];?></h3>
-            <div class="price"><?php echo $row['price'];?> <span><?php echo ((int) $row['price'])+((int) $row['price'])*20/100;?></span></div>
-            <!-- <a href="addCard.php" class="btn" onclick="">add to cart</a> -->
+    <center>
+        <label for="id"><h1 class="heading"> Choose a  <span>user</span> </h1></label>
+        <div >
+            <select id="id" name="id" size="1" style="width: 29rem;background-color: #161c13;color: #d3ad7f;">
             <?php
-               echo "<a  class='btn' onclick='addcard( {$row['product_id']})'>add to cart</a>"
-            ?>
-            
+                while($a=$selectAllUser->fetch_array()){
+                ?>
+                <option value=<?php echo $a[0] ?>><?php echo $a[1] ?></option>
+                <?php } ?>
+            </select>
+            <span class="focus"></span>
         </div>
-
-        <?php } ?>
-    </div>
-
+    </center>
 
     <h1 class="heading"> our <span>menu</span> </h1>
 
@@ -424,7 +397,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="images/blog-1.jpeg" alt="">
+                <img src="../images/blog-1.jpeg" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title">tasty and refreshing coffee</a>
@@ -436,7 +409,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="images/blog-2.jpeg" alt="">
+                <img src="../images/blog-2.jpeg" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title">tasty and refreshing coffee</a>
@@ -448,7 +421,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="images/blog-3.jpeg" alt="">
+                <img src="../images/blog-3.jpeg" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title">tasty and refreshing coffee</a>
