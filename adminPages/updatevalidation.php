@@ -29,7 +29,7 @@
             $errors['profile_pic'] = "Invalid image type!";
 
         }else{
-            move_uploaded_file($tmp_name, "../images/".$image_name);
+            move_uploaded_file($tmp_name, "../images/" .$image_name);
         }
         
     }catch (Exception $e) {
