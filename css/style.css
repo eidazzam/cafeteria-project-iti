@@ -74,7 +74,7 @@ section {
   letter-spacing: 0.2rem;
 }
 
-.header {
+/* .header {
   background: var(--bg);
   display: flex;
   align-items: center;
@@ -114,11 +114,11 @@ section {
 .header .icons div:hover {
   color: var(--main-color);
 }
-
+ */
 #menu-btn {
   display: none;
 }
-
+/* 
 .header .search-form {
   position: absolute;
   top: 115%;
@@ -209,7 +209,7 @@ section {
 .header .cart-items-container .btn {
   width: 100%;
   text-align: center;
-}
+} */
 
 .home {
   min-height: 100vh;
@@ -570,9 +570,9 @@ section {
     font-size: 55%;
   }
 
-  .header {
+  /* .header {
     padding: 1.5rem 2rem;
-  }
+  } */
 
   section {
     padding: 2rem;
@@ -583,7 +583,7 @@ section {
   #menu-btn {
     display: inline-block;
   }
-
+  /* 
   .header .navbar {
     position: absolute;
     top: 100%;
@@ -609,7 +609,7 @@ section {
     width: 90%;
     right: 2rem;
   }
-
+ */
   .home {
     background-position: left;
     justify-content: center;
