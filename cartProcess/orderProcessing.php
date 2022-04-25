@@ -5,7 +5,7 @@ $db= new Database();
 $dbcon= $db->connect();
 
 $date=date('Y-m-d H:i:s');
-$ins="INSERT INTO `orders` (`order_id`,`user_id`, `date`, `status`,`totalPrice`) VALUES ('1','{$_GET['id']}', '{$date}','processing','{$_POST['totalPrice']}')";
+$ins="INSERT INTO `orders` (`order_id`,`user_id`, `date`, `status`,`totalPrice`) VALUES ('3','{$_GET['id']}', '{$date}','processing','{$_POST['totalPrice']}')";
 
 if ($dbcon->query($ins) === TRUE) {
     echo "New record created successfully";
@@ -15,7 +15,7 @@ if ($dbcon->query($ins) === TRUE) {
   
 foreach ($_POST as $key=>$value){
     if($key!="totalPrice"){
-        $ins="INSERT INTO `order_product` (`order_id`,`product_id`, `quantity`) VALUES ('1','{$key}', '{$value}')";
+        $ins="INSERT INTO `order_product` (`order_id`,`product_id`, `quantity`) VALUES ('3','{$key}', '{$value}')";
         $insert=$dbcon->query($ins);
         //         var_dump($key);//product id
         // echo '<br/>';
