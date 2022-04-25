@@ -14,7 +14,7 @@ if ($_SESSION['is_admin'] != 1) {
 ?>
 
 
-<?php include("../db.php");
+<?php include("../database/db.php");
 
 $results_per_page = 2;
 $sql = "select * from product";
@@ -67,9 +67,13 @@ $result = mysqli_query($conn, $sql);
             <?php
             $query = "SELECT p.* ,c.name as category FROM product p, category c Where p.category_id=c.id  LIMIT " . $this_page_first_result . "," .  $results_per_page;
             $result_tasks = mysqli_query($conn, $query);
+            // var_dump($query);
+            // var_dump($result_tasks);
+            
 
 
             while ($row = mysqli_fetch_assoc($result_tasks)) { ?>
+            
                 <tr>
                     <td><?php echo $row['name']; ?></td>
                     <td><?php echo $row['price']; ?> EGP</td>

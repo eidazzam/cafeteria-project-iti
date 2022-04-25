@@ -21,7 +21,7 @@ if ($_SESSION['is_admin'] != 1) {
 ?>
 
 
-<?php include("../db.php"); ?>
+<?php include("../database/db.php"); ?>
 
 <?php include('adminNav.html') ?>
 

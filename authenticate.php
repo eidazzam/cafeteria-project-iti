@@ -30,7 +30,7 @@ if ($stmt = $db->prepare($query)) {
             $_SESSION['is_admin'] = $res['is_admin'];
 
             if ($res['is_admin']) {
-                header('Location: adminPages/manualOrder.php');
+                header('Location: adminPages/homeAdmin.php');
             } else {
                 header('Location: userPages/home.php');
             }

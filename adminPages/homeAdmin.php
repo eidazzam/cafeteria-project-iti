@@ -46,6 +46,7 @@
             $_SESSION["shopping_cart"][0] = $item_array;  
         }  
  } 
+ require_once './adminNav.html';
 
 
 ?>
@@ -63,13 +64,14 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js"></script>
 
 </head>
 <body>
     
 <!-- header section starts  -->
 
-<header class="header">
+<!-- <header class="header">
 
     <a href="#" class="logo">
         <img src="../images/logo.png" alt="">
@@ -132,7 +134,7 @@
         <a href="#" class="btn">checkout now</a>
     </div>
 
-</header>
+</header> -->
 
 <!-- header section ends -->
 
@@ -471,18 +473,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 <!-- custom js file link  -->
-<script src="../js/script.js"></script>
+
 
 </body>
 </html>

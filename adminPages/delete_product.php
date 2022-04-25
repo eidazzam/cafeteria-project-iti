@@ -14,7 +14,7 @@ session_start();
 
 <?php
 
-include("../db.php");
+include("../database/db.php");
 var_dump($_GET);
 
 if (isset($_GET['id'])) {

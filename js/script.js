@@ -27,8 +27,12 @@ window.onscroll = () => {
   searchForm.classList.remove("active");
   cartItem.classList.remove("active");
 };
-let cardItems = [];
+var cardItems = [];
+var help = [];
+
 function addcard(product_id) {
+  // console.log(product_id);
+  console.log(cardItems);
   if (cardItems.find((item) => item == product_id)) {
     console.log("already added");
   } else {

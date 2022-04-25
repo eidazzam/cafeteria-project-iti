@@ -62,6 +62,7 @@
             $_SESSION["shopping_cart"][0] = $item_array;  
         }  
  } 
+ require_once './userNav.html';
 
 
 ?>
@@ -84,7 +85,7 @@
 <body>
     <?php
     
-    require_once './userNav.html';
+    // require_once './userNav.html';
     
     ?>
     
