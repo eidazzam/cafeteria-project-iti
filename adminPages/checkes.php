@@ -43,16 +43,20 @@ include '../config.php';
   html, body {
     height: 100%;
     margin: 0;
+    background-image: url("../images/dark_bg.jpg");
+    color: navajowhite;
   }
 
 body {
     background-color: #faf9f4;
     font-family: 'Tajawal', sans-serif;
     /* padding-top: 20px; */
+    color: navajowhite;
 
 }
 
 .container{
+    color: navajowhite;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,6 +67,7 @@ body {
 
 }
 .myform{
+
     margin: 10px;
     padding: 10px;
     width: 100%;
@@ -70,12 +75,13 @@ body {
     /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-    background-color: rgb(44 98 98);
+    background-color: #606064;
+
 }
 
 #table-head{
     text-align: center;
-    background-color: midnightblue;
+    background-color: #606064;
     color: navajowhite;
     font-size: 1.3rem;
 }
@@ -88,7 +94,7 @@ body {
     display: flex;
     align-content: center;
     justify-content: center;
-    background-color: #241a08;
+    border: 8px #606064 solid;
 }
 .date-from-to{
     display: flex;
@@ -141,6 +147,17 @@ body {
 .find-inner input{
     width: 5rem;
 }
+.buttonStyle {
+  background-color: #3c3c3d;
+  color: navajowhite;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+  margin-top: 37px;
+}
 
 /* .user {
 
@@ -157,7 +174,6 @@ body {
 }
 
 .item-card {
-    background: #faf9f4;
     text-align: center;
     padding: 10px;
     margin: 10px;
@@ -259,7 +275,7 @@ $allUsers=getAllUser();
                         </div>
                     </div>
                     <div class="find-outer">
-                        <input type="submit" value="Find" class="btn btn-primary">
+                        <input type="submit" value="Find" class=" buttonStyle" >
                     </div>
 
                 </div>

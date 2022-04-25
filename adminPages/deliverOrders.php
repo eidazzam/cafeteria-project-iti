@@ -59,9 +59,9 @@ $res = $stmt->fetchAll();
       echo "<tr class='order-data'>";
       echo "<td>".$data['date']."</td><td>".$data['username']."</td><td>".$data['room']."</td><td>".$data['ext']."</td><td>";
       if($data['status'] != "out for delivery"){
-      echo "<button onclick=updateOrder(".$data['order_id'].",'deliver',this)>Deliver</button>";
+      echo "<button class='buttonStyle' onclick=updateOrder(".$data['order_id'].",'deliver',this)>Deliver</button>";
       }
-      echo "<button onclick=updateOrder(".$data['order_id'].",'done',this)>Done</button>
+      echo "<button class='buttonStyle' onclick=updateOrder(".$data['order_id'].",'done',this)>Done</button>
       </td>";
       echo "</tr>";
       echo "<tr><td class='row-data' colspan='100%'><div class='order-items'>";
@@ -69,7 +69,7 @@ $res = $stmt->fetchAll();
       foreach($res as $orderdata){
         if($data['order_id'] == $orderdata['order_id']){
           echo "<div id='small-container'>
-          <div class='item-img'> <img src='".$orderdata['pic']."' alt='img'></div>
+          <div class='item-img'> <img src='../images/".$orderdata['pic']."' alt='img'></div>
           <div class='item-name'>".$orderdata['name']."</div>
           <div class='item-price'> Price : ".$orderdata['price']." L.E"."</div>
           <div class='item-quantity'>"."Qty : ".$orderdata['quantity']."</div>

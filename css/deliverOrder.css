@@ -1,0 +1,140 @@
+body {
+  font-family: Helvetica, sans-serif;
+  background-image: url("../images/dark_bg.jpg");
+  color: navajowhite;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#head {
+  font-size: 1.7rem;
+  margin-bottom: 0px;
+  padding-bottom: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+#head p {
+  /* color: midnightblue; */
+  color: navajowhite;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+table {
+  width: 60vw;
+  border: 1px solid lightgray;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.055),
+    0 3px 15px 0 rgba(0, 0, 0, 0.103);
+  text-align: center;
+  color: navajowhite;
+}
+
+/* tr:nth-child(even) {
+    background-color: #f2f2f2;
+  } */
+
+.table-header {
+  background-color: #3c3c3d;
+  color: navajowhite;
+  font-size: 1.2rem;
+  height: 2.5rem;
+}
+
+th {
+  background-color: #3c3c3d;
+}
+.order-data {
+  font-size: 1rem;
+  height: 2.5rem;
+}
+
+td,
+th {
+  min-width: 100px;
+  padding: 5px;
+  /* max-width: 100px; */
+}
+
+tr:nth-child(even) {
+  background-color: #606064;
+}
+.order-items {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  /* padding: 10px; */
+  margin: 0;
+  /* flex-wrap: wrap; */
+}
+
+#small-container {
+  padding: 5px;
+  margin: 5px;
+}
+.row-data {
+  /* display: flex;
+    flex-direction: column; */
+  padding: 0;
+  margin: 0;
+}
+.total-info {
+  color: navajowhite;
+  font-size: 30px;
+  /* font-weight: bolder; */
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+
+.label,
+.value {
+  text-align: center;
+  padding: 3px;
+}
+
+.item-img img {
+  height: 50px;
+  width: 50px;
+}
+
+tr {
+  position: relative;
+}
+
+.total {
+  position: absolute;
+  right: 3%;
+  top: 30%;
+  color: #c20303;
+}
+
+button {
+  color: #606064;
+  border: none;
+  background-color: navajowhite;
+  text-align: center;
+  display: inline-block;
+  /* width: 60px; */
+
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+.buttonStyle {
+  background-color: #3c3c3d;
+  color: navajowhite;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+}

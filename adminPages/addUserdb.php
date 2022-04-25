@@ -23,13 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $is_admin = test_input($_POST['admin']);
     }
-
+    
+    
+    
     if (isset($_FILES['image'])) {
         $errors = array();
         $file_name = $_FILES['image']['name'];
         $file_size = $_FILES['image']['size'];
         $file_tmp = $_FILES['image']['tmp_name'];
         $file_type = $_FILES['image']['type'];
+        // if user didn't upload image set it to user.png by default
+        
         $ext = explode('.', $_FILES['image']['name']);
         $file_ext = strtolower(end($ext));
         $extensions = array("jpeg", "jpg", "png");
@@ -40,11 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = 'File size must be lower than 2 MB';
         }
         if (empty($errors) == true) {
-            move_uploaded_file($file_tmp, "../images/" . $file_name);
+
+                // $file_name = "user.png";
+                move_uploaded_file($file_tmp, "../images/" . $file_name);
         } else {
             print_r($errors);
         }
     }
+    
     #select users from db
     $sql = "SELECT user_id,username FROM user";
     $stmt = $db->prepare($sql);

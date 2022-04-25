@@ -51,8 +51,8 @@ if (isset($_POST["email"]) && (!empty($_POST["email"]))) {
       $output = '<p>Dear user,</p>';
       $output .= '<p>Please click on the following link to reset your password.</p>';
       $output .= '<p>================================================================</p>';
-      $output .= '<p><a href="http://localhost/cafeteria-project-iti/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset" target="_blank">
-http://localhost/cafeteria-project-iti/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset</a></p>';
+      $output .= '<p><a href="http://localhost:8080/laravel/projectCafateria/coffee website/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset" target="_blank">
+http://localhost:8080/laravel/projectCafateria/coffee website/reset-password.php?key=' . $key . '&email=' . $email . '&action=reset</a></p>';
       $output .= '<p>================================================================</p>';
       $output .= '<p>Please be sure to copy the entire link into your browser.
 The link will expire after 1 day for security reasons.</p>';
