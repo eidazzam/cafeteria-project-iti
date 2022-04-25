@@ -84,13 +84,13 @@
 <body>
     <?php
     
-    // require_once './userNav.html';
+    require_once './userNav.html';
     
     ?>
     
 <!-- header section starts  -->
 
-<header class="header">
+<!-- <header class="header">
 
     <a href="#" class="logo">
         <img src="images/logo.png" alt="">
@@ -153,7 +153,7 @@
         <a href="#" class="btn">checkout now</a>
     </div>
 
-</header>
+</header> -->
 
 <!-- header section ends -->
 
