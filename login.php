@@ -4,7 +4,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
     if ($_SESSION['is_admin'] != 1) {
         header("Location: userPages/home.php");
     } else {
-        header("Location: adminPages/manualOrder.php");
+        header("Location: adminPages/homeAdmin.php");
     }
 }
 ?>

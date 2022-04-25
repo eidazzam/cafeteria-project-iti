@@ -1,6 +1,6 @@
 <?php
   session_start(); 
-  require('./database/dbConnect.php'); 
+  require('../database/dbConnect.php'); 
   $data=new Database();
   $data->connect();
   if(isset($_REQUEST['cardItems'] )){
@@ -51,7 +51,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="css/card.css" />
+    <link rel="stylesheet" href="../css/card.css" />
 
     <title>Document</title>
     <style>
@@ -99,7 +99,7 @@
             <div class="row border-top border-bottom">
               <div class="row main align-items-center">
                 <div class="col-2">
-                  <img class="img-fluid" src="images/<?php echo $item['pic']?>" />
+                  <img class="img-fluid" src="../images/<?php echo $item['pic']?>" />
                 </div>
                 <div class="col">
                   <div class="row text-muted"><?php echo $item['name']?></div>
@@ -125,9 +125,18 @@
             // var_dump($a);
             
             ?>
-            <div class="back-to-shop" href="home.php?id=1">
-              <a href="home.php?id=1">&leftarrow;</a
-              ><span class="text-muted" href="home.php?id=1">Back to shop</span>
+            <div class="back-to-shop" >
+              <?php
+              if($_SESSION['is_admin']==1){
+                ?>
+                <a href="../adminPages/homeAdmin.php?id=1">&leftarrow;</a >
+                <?php
+              }else{
+                ?>
+                <a href="../userPages/home.php?id=1">&leftarrow;</a >
+                <?php } ?>
+              
+              <span class="text-muted" >Back to shop</span>
             </div>
           </div>
           <div class="col-md-4 summary">

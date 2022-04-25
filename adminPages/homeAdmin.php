@@ -1,8 +1,10 @@
 <?php
     session_start(); 
+    // require('../database/dbConnect.php');
+    // $_session['']
     $_session['shopping_cart'] = array();
 
-    $db=require('./database/dbConnect.php'); 
+    $db=require('../database/dbConnect.php'); 
     $data=new Database();
     $dbcon=$data->connect();
 
@@ -60,7 +62,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -70,7 +72,7 @@
 <header class="header">
 
     <a href="#" class="logo">
-        <img src="images/logo.png" alt="">
+        <img src="../images/logo.png" alt="">
     </a>
 
     <nav class="navbar">
@@ -97,7 +99,7 @@
     <div class="cart-items-container">
         <div class="cart-item">
             <span class="fas fa-times"></span>
-            <img src="images/cart-item-1.png" alt="">
+            <img src="../images/cart-item-1.png" alt="">
             <div class="content">
                 <h3>cart item 01</h3>
                 <div class="price">$15.99/-</div>
@@ -105,7 +107,7 @@
         </div>
         <div class="cart-item">
             <span class="fas fa-times"></span>
-            <img src="images/cart-item-2.png" alt="">
+            <img src="../images/cart-item-2.png" alt="">
             <div class="content">
                 <h3>cart item 02</h3>
                 <div class="price">$15.99/-</div>
@@ -113,7 +115,7 @@
         </div>
         <div class="cart-item">
             <span class="fas fa-times"></span>
-            <img src="images/cart-item-3.png" alt="">
+            <img src="../images/cart-item-3.png" alt="">
             <div class="content">
                 <h3>cart item 03</h3>
                 <div class="price">$15.99/-</div>
@@ -121,7 +123,7 @@
         </div>
         <div class="cart-item">
             <span class="fas fa-times"></span>
-            <img src="images/cart-item-4.png" alt="">
+            <img src="../images/cart-item-4.png" alt="">
             <div class="content">
                 <h3>cart item 04</h3>
                 <div class="price">$15.99/-</div>
@@ -157,7 +159,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="images/about-img.jpeg" alt="">
+            <img src="../images/about-img.jpeg" alt="">
         </div>
 
         <div class="content">
@@ -197,7 +199,7 @@
             while($row=$selectAllProduct->fetch_assoc()){
         ?>
         <div class="box">
-            <img src="images/<?php echo $row['pic'];?>" alt="">
+            <img src="../images/<?php echo $row['pic'];?>" alt="">
             <h3><?php echo $row['name'];?></h3>
             <div class="price"><?php echo $row['price'];?> <span><?php echo ((int) $row['price'])+((int) $row['price'])*20/100;?></span></div>
             <!-- <a href="addCard.php" class="btn" onclick="">add to cart</a> -->
@@ -210,7 +212,7 @@
         
     </div>
     <br/>
-    <form action="addCard.php?id=1" method="post">
+    <form action="../cartProcess/addCard.php?id=1" method="post">
         <input type="hidden" name="cardItems" id='cardItems' value="">    
         <input type="submit" value="Check your card" class="btn">
     </form>
@@ -233,7 +235,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="image">
-                <img src="images/product-1.png" alt="">
+                <img src="../images/product-1.png" alt="">
             </div>
             <div class="content">
                 <h3>fresh coffee</h3>
@@ -255,7 +257,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="image">
-                <img src="images/product-2.png" alt="">
+                <img src="../images/product-2.png" alt="">
             </div>
             <div class="content">
                 <h3>fresh coffee</h3>
@@ -277,7 +279,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="image">
-                <img src="images/product-3.png" alt="">
+                <img src="../images/product-3.png" alt="">
             </div>
             <div class="content">
                 <h3>fresh coffee</h3>
@@ -305,9 +307,9 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="images/quote-img.png" alt="" class="quote">
+            <img src="../images/quote-img.png" alt="" class="quote">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
-            <img src="images/pic-1.png" class="user" alt="">
+            <img src="../images/pic-1.png" class="user" alt="">
             <h3>john deo</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -319,9 +321,9 @@
         </div>
 
         <div class="box">
-            <img src="images/quote-img.png" alt="" class="quote">
+            <img src="../images/quote-img.png" alt="" class="quote">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
-            <img src="images/pic-2.png" class="user" alt="">
+            <img src="../images/pic-2.png" class="user" alt="">
             <h3>john deo</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -333,9 +335,9 @@
         </div>
         
         <div class="box">
-            <img src="images/quote-img.png" alt="" class="quote">
+            <img src="../images/quote-img.png" alt="" class="quote">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
-            <img src="images/pic-3.png" class="user" alt="">
+            <img src="../images/pic-3.png" class="user" alt="">
             <h3>john deo</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -395,7 +397,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="images/blog-1.jpeg" alt="">
+                <img src="../images/blog-1.jpeg" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title">tasty and refreshing coffee</a>
@@ -407,7 +409,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="images/blog-2.jpeg" alt="">
+                <img src="../images/blog-2.jpeg" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title">tasty and refreshing coffee</a>
@@ -419,7 +421,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="images/blog-3.jpeg" alt="">
+                <img src="../images/blog-3.jpeg" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title">tasty and refreshing coffee</a>
@@ -480,7 +482,7 @@
 
 
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
+<script src="../js/script.js"></script>
 
 </body>
 </html>

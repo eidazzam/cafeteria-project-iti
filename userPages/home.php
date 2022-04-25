@@ -1,158 +1,515 @@
 <?php
-// We need to use sessions, so you should always start sessions using the below code.
-session_start();
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: ../login.php');
-}
-if ($_SESSION['is_admin']==1){
-    die ("Access Denied");
-}
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+    session_start(); 
+    if(empty($_SESSION['loggedin'])){
+        header('Location: ../login.php');
+    }
+    if($_SESSION['is_admin']==1){
+        die ("Access Denied");
+    }
+
+    $_session['shopping_cart'] = array();
+
+    $db=require('../database/dbConnect.php'); 
+    $data=new Database();
+    $dbcon= $data->connect();
+    $selectAllProduct=$data->select("product");
+
+    $previous_week = strtotime("-1 week +1 day");
+    // var_dump($previous_week);
+    $start_week = strtotime("last sunday midnight",$previous_week);
+    $end_week = strtotime("next saturday",$start_week);
+
+    $start_week = date("Y-m-d",$start_week);
+    $end_week = date('Y-m-d H:i:s');
+    // var_dump($start_week);
+    // var_dump($end_week);
+    
+    
+    $query="SELECT Distinct `product`.* FROM `orders`,`product`,`order_product` WHERE product.product_id = order_product.product_id AND order_product.order_id = orders.order_id AND orders.date BETWEEN '{$start_week}' AND '{$end_week}' ORDER BY orders.date desc ";
+    $result=$dbcon->query($query);
+
+
+      if(isset($_POST["add_to_cart"]))  
+       {  
+        if(isset($_SESSION["shopping_cart"]))  
+        {  
+            $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");  
+            if(!in_array($_GET["id"], $item_array_id))  
+            {  
+                    $count = count($_SESSION["shopping_cart"]);  
+                    $item_array = array(  
+                        'item_id'               =>     $_GET["id"],  
+                        'item_name'               =>     $_POST["hidden_name"],  
+                        'item_price'          =>     $_POST["hidden_price"],  
+                        'item_quantity'          =>     $_POST["quantity"]  
+                    );  
+                    $_SESSION["shopping_cart"][$count] = $item_array;  
+            }  
+            else  
+            {  
+                    echo '<script>alert("Item Already Added")</script>';  
+                    echo '<script>window.location="index.php"</script>';  
+            }  
+        }  
+        else  
+        {  
+            $item_array = array(  
+                    'item_id'               =>     $_GET["id"],  
+                    'item_name'               =>     $_POST["hidden_name"],  
+                    'item_price'          =>     $_POST["hidden_price"],  
+                    'item_quantity'          =>     $_POST["quantity"]  
+            );  
+            $_SESSION["shopping_cart"][0] = $item_array;  
+        }  
+ } 
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../css/home.css" />
-    <link rel="stylesheet" href="../css/adminNav.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive coffee shop website design</title>
 
-    <title>Home</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../css/style.css">
+
 </head>
-
 <body>
-    <!-- TO DO getting all user info  -->
-    <div class="nav-bar">
-        <div class="left-nav">
-            <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-            <span>|</span>
-            <a href="myorders.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Orders</a>
-        </div>
+    <?php
+    
+    // require_once './userNav.html';
+    
+    ?>
+    
+<!-- header section starts  -->
 
-        <div class="right-nav">
-                <img class="user-pic" src=<?php echo $_SESSION['profile_pic']?>>
-                <a><?php echo $_SESSION['name']?></a>
-            <div class=log-out>
-                <div>|</div>
-                <a id="logOut" href="../logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+<header class="header">
+
+    <a href="#" class="logo">
+        <img src="images/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#about">about</a>
+        <a href="#menu">menu</a>
+        <a href="#products">products</a>
+        <a href="#review">review</a>
+        <a href="#contact">contact</a>
+        <a href="#blogs">blogs</a>
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+
+    <div class="cart-items-container">
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="../images/cart-item-1.png" alt="">
+            <div class="content">
+                <h3>cart item 01</h3>
+                <div class="price">$15.99/-</div>
             </div>
         </div>
-        <i class="fa fa-bars" aria-hidden="true"></i>
-
-    </div>
-
-    <div class="main">
-            <form  class="order-data" id="form" action="insertOrder.php" method="post">
-                <div  class="order">
-                    <p>My Order</p>
-                    <hr>
-                    <div class='order-details'>Order Details :</div>
-                    <div id="list"></div>
-                </div>
-                <hr>
-                <div class="notes">
-                    <label id="notes" for="notes">Notes:</label>
-                    <textarea name="notes" id="notes" rows="4" cols="50">
-                    </textarea>
-                </div>
-                <div class="room">
-                    <label for="room">Room</label>
-                    <select name="room" id="room">
-                        <option value="1001">1001</option>
-                        <option value="1002">1002</option>
-                        <option value="1003">1003</option>
-                    </select>
-                </div>
-                <div class='footer'>
-                <div id="orderFooter" class="orderFooter">
-                <hr>
-                    <span id=total>Total: 0 L.E</span><br>
-                    <hr>                    
-                </div>
-                <button class="confirm" type="submit">Confirm</button>
-                </div>                
-            </form>
-        <div class="product-list-addUser">
-            <input type="text" name="search" id="search">
-            <?php
-            include '../config.php';
-            //latest order
-            $user_id=$_SESSION['id'];
-
-            $query="SELECT p.name , o.quantity ,p.pic FROM order_product o,product p WHERE p.product_id=o.product_id AND order_id=(SELECT order_id FROM orders WHERE user_id=$user_id ORDER by date DESC limit 1 )";
-            $stmt = $db->query($query);
-            $res = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            echo "<div class='latest-order'>
-            <div class='latestOrder-title'>Latest Order</div>
-            <div class='all-items'>";
-
-            while ($ele = $stmt->fetch()) {
-                echo ("<div class='order-item'>
-                <img class='item-img' src={$ele['pic']}  />
-                <div>{$ele['name']}</div>
-                <div>Qty: {$ele['quantity']}</div>
-            </div>");
-            } 
-            echo "</div></div>";
-
-            // show all products
-            $query = "SELECT product_id,name,price,pic FROM product";
-            $stmt = $db->query($query);
-
-            $res = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-            echo "<div class='products-list'><div class='produts-list-title'>Available Products</div>";
-            echo "<div class='search-bar'><input type='text' placeholder='find product' name='search' id='search'></div>";
-            echo "<div class='items-list'>";
-            while ($ele = $stmt->fetch()) {
-                echo ("<div class=item>
-                <img class='item-img product'  data-price={$ele['price']} data-name={$ele['name']} data-id={$ele['product_id']} src={$ele['pic']}  />
-                <div>{$ele['name']} </div>
-                <div>{$ele['price']} L.E</div>
-
-            </div>");
-            }
-            echo "</div>";
-            echo "</div>";
-            $db = null;
-            ?>
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="../images/cart-item-2.png" alt="">
+            <div class="content">
+                <h3>cart item 02</h3>
+                <div class="price">$15.99/-</div>
+            </div>
         </div>
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="../images/cart-item-3.png" alt="">
+            <div class="content">
+                <h3>cart item 03</h3>
+                <div class="price">$15.99/-</div>
+            </div>
+        </div>
+        <div class="cart-item">
+            <span class="fas fa-times"></span>
+            <img src="../images/cart-item-4.png" alt="">
+            <div class="content">
+                <h3>cart item 04</h3>
+                <div class="price">$15.99/-</div>
+            </div>
+        </div>
+        <a href="#" class="btn">checkout now</a>
     </div>
-    
-    <div class="footer">
-        <p>Footer</p>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3>fresh coffee in the morning</h3>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat labore, sint cupiditate distinctio tempora reiciendis.</p>
+        <a href="#" class="btn">get yours now</a>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span>about</span> us </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="../images/about-img.jpeg" alt="">
+        </div>
+
+        <div class="content">
+            <h3>what makes our coffee special?</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ea ullam, enim tempora ipsum fuga alias quae ratione a officiis id temporibus autem? Quod nemo facilis cupiditate. Ex, vel?</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit amet enim quod veritatis, nihil voluptas culpa! Neque consectetur obcaecati sapiente?</p>
+            <a href="#" class="btn">learn more</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- menu section starts  -->
+
+<section class="menu" id="menu">
+
+    <h1 class="heading">Latest <span>orders</span> </h1>
+    <div class="box-container">
+    <?php while($row=$result->fetch_array()){ ?>
+        
+        <div class="box">
+            <img src="../images/<?php echo $row['pic'];?>" alt="">
+            <h3><?php echo $row['name'];?></h3>
+            <div class="price"><?php echo $row['price'];?> <span><?php echo ((int) $row['price'])+((int) $row['price'])*20/100;?></span></div>
+            <!-- <a href="addCard.php" class="btn" onclick="">add to cart</a> -->
+            <?php
+               echo "<a  class='btn' onclick='addcard( {$row['product_id']})'>add to cart</a>"
+            ?>
+            
+        </div>
+
+        <?php } ?>
     </div>
 
 
-    <script src="../js/home.js"></script>
-      <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-      crossorigin="anonymous"
-    ></script>
+    <h1 class="heading"> our <span>menu</span> </h1>
+
+    <div class="box-container">
+        <?php
+            while($row=$selectAllProduct->fetch_assoc()){
+        ?>
+        <div class="box">
+            <img src="../images/<?php echo $row['pic'];?>" alt="">
+            <h3><?php echo $row['name'];?></h3>
+            <div class="price"><?php echo $row['price'];?> <span><?php echo ((int) $row['price'])+((int) $row['price'])*20/100;?></span></div>
+            <!-- <a href="addCard.php" class="btn" onclick="">add to cart</a> -->
+            <?php
+               echo "<a  class='btn' onclick='addcard( {$row['product_id']})'>add to cart</a>"
+            ?>
+            
+        </div>
+        <?php } ?>
+        
+    </div>
+    <br/>
+    <form action="../cartProcess/addCard.php?id=1" method="post">
+        <input type="hidden" name="cardItems" id='cardItems' value="">    
+        <input type="submit" value="Check your card" class="btn">
+    </form>
+</section>
+
+<!-- menu section ends -->
+
+
+
+<section class="products" id="products">
+
+    <h1 class="heading"> our <span>products</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="icons">
+                <a href="#" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+            <div class="image">
+                <img src="../images/product-1.png" alt="">
+            </div>
+            <div class="content">
+                <h3>fresh coffee</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="price">$15.99 <span>$20.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="icons">
+                <a href="#" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+            <div class="image">
+                <img src="../images/product-2.png" alt="">
+            </div>
+            <div class="content">
+                <h3>fresh coffee</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="price">$15.99 <span>$20.99</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="icons">
+                <a href="#" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+            <div class="image">
+                <img src="../images/product-3.png" alt="">
+            </div>
+            <div class="content">
+                <h3>fresh coffee</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="price">$15.99 <span>$20.99</span></div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- review section starts  -->
+
+<section class="review" id="review">
+
+    <h1 class="heading"> customer's <span>review</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="../images/quote-img.png" alt="" class="quote">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
+            <img src="../images/pic-1.png" class="user" alt="">
+            <h3>john deo</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="../images/quote-img.png" alt="" class="quote">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
+            <img src="../images/pic-2.png" class="user" alt="">
+            <h3>john deo</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+        </div>
+        
+        <div class="box">
+            <img src="../images/quote-img.png" alt="" class="quote">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
+            <img src="../images/pic-3.png" class="user" alt="">
+            <h3>john deo</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- review section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+    <h1 class="heading"> <span>contact</span> us </h1>
+
+    <div class="row">
+
+        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30153.788252261566!2d72.82321484621745!3d19.141690214227783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x2aa80cf2287dfa3b!2sJogeshwari%20West%2C%20Mumbai%2C%20Maharashtra%20400047!5e0!3m2!1sen!2sin!4v1629452077891!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+
+        <form action="">
+            <h3>get in touch</h3>
+            <div class="inputBox">
+                <span class="fas fa-user"></span>
+                <input type="text" placeholder="name">
+            </div>
+            <div class="inputBox">
+                <span class="fas fa-envelope"></span>
+                <input type="email" placeholder="email">
+            </div>
+            <div class="inputBox">
+                <span class="fas fa-phone"></span>
+                <input type="number" placeholder="number">
+            </div>
+            <input type="submit" value="contact now" class="btn">
+        </form>
+
+    </div>
+
+</section>
+
+<!-- contact section ends -->
+
+<!-- blogs section starts  -->
+
+<section class="blogs" id="blogs">
+
+    <h1 class="heading"> our <span>blogs</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="image">
+                <img src="images/blog-1.jpeg" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">tasty and refreshing coffee</a>
+                <span>by admin / 21st may, 2021</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
+                <a href="#" class="btn">read more</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/blog-2.jpeg" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">tasty and refreshing coffee</a>
+                <span>by admin / 21st may, 2021</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
+                <a href="#" class="btn">read more</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/blog-3.jpeg" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">tasty and refreshing coffee</a>
+                <span>by admin / 21st may, 2021</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
+                <a href="#" class="btn">read more</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- blogs section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+
+    <div class="links">
+        <a href="#">home</a>
+        <a href="#">about</a>
+        <a href="#">menu</a>
+        <a href="#">products</a>
+        <a href="#">review</a>
+        <a href="#">contact</a>
+        <a href="#">blogs</a>
+    </div>
+
+    <div class="credit">created by <span>mr. web designer</span> | all rights reserved</div>
+
+</section>
+
+<!-- footer section ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- custom js file link  -->
+<script src="../js/script.js"></script>
+
 </body>
-
 </html>
