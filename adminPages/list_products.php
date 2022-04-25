@@ -14,7 +14,7 @@ if ($_SESSION['is_admin'] != 1) {
 ?>
 
 
-<?php include("../database/db.php");
+<?php include("../db.php");
 
 $results_per_page = 2;
 $sql = "select * from product";
