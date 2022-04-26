@@ -35,6 +35,7 @@ $res = $stmt->fetchAll();
     <title>Check orders</title>
     <link href="../css/deliverOrder.css" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="../css/adminNav.css" />
+      
 
 </head>
 <body>

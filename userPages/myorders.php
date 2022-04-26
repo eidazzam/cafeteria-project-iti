@@ -6,6 +6,9 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../css/myorders.css">
+        <link rel="stylesheet" href="../css/deliverOrder.css">
+
+        
   
 <?php
 session_start();
@@ -130,7 +133,7 @@ if($to && $from)
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <table class="table table-hover">
+      <table class=" " style="color: navajowhite;">
         <thead class="thead-dark">
           <tr>
             <th>Order Date</th>
