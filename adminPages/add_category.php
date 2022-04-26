@@ -71,12 +71,21 @@ if ($_SESSION['is_admin'] != 1) {
         <div class="col-md-5">
 
             <div class="card card-body">
-                <form action="save_product.php" method="POST" enctype="multipart/form-data">
+                <form action="save_category.php" method="POST">
 
                     <div class="title form-group mb-3">
-                        <h1> Add Product </h1>
+                        <h1> Add Category </h1>
                     </div>
-
+                    <div class="form-group mb-3">
+                        <input type="text" name="id" class="form-control" placeholder="Product ID" value="<?php if (isset($data->id)) echo "{$data->id}"; ?>" autofocus>
+                        <p style="color: red;">
+                            <?php
+                            if (isset($errors->id)) {
+                                echo "{$errors->id} ";
+                            }
+                            ?>
+                        </p>
+                    </div>
                     <div class="form-group mb-3">
                         <input type="text" name="name" class="form-control" placeholder="Product Name" value="<?php if (isset($data->name)) echo "{$data->name}"; ?>" autofocus>
                         <p style="color: red;">
@@ -88,51 +97,8 @@ if ($_SESSION['is_admin'] != 1) {
                         </p>
                     </div>
 
-                    <div class="form-group mb-3">
-                        <input type="number" name="price" class="form-control" placeholder="cost" min="0" value="<?php if (isset($data->price)) echo "{$data->price}"; ?>" autofocus>
-                        <p style="color: red;">
-                            <?php
-                            if (isset($errors->price)) {
-                                echo "{$errors->price} ";
-                            }
-                            ?>
-                        </p>
-                    </div>
 
-                    <div class="form-group mb-3">
-                        <select class="form-control" id="exampleFormControlSelect1" name="category">
-
-                            <?php
-                            $query = "SELECT * FROM category";
-                            $result_tasks = mysqli_query($conn, $query);
-                            while ($row = mysqli_fetch_assoc($result_tasks)) {
-                                echo "<option value='{$row['id']}'>{$row['name']}</option>";
-                            }
-                            ?>
-                        </select>
-                        <a href="add_category.php" class="btn  btn-block mb-3 mt-3" id="add_product"> Add Category</a>
-                    </div>
-
-                    <div class="input-group mb-3">
-
-                        <div class="custom-file">
-                            <input type="file" name="file" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
-                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-
-                        </div>
-
-
-                    </div>
-                    <p style="color: red;" class="mb-3">
-
-                        <?php
-                        if (isset($errors->file)) {
-                            echo "{$errors->file} ";
-                        }
-                        ?>
-
-                    </p>
-                    <input type="submit" name="save_task" id="add" class="btn btn-success btn-block mb-3" value="Add ">
+                    <input type="submit" name="save_task" id="add" class="btn  btn-block mb-3" value="Add ">
                 </form>
 
             </div>
